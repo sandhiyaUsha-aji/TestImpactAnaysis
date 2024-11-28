@@ -13,6 +13,7 @@ public class sample {
 		 
 		WebDriver driver=new  ChromeDriver();
 		driver.get("https://bct3.my.salesforce.com");
-	}
+		System.out.println("Hello");
+		}
 
 }

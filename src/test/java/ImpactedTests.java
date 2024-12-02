@@ -13,14 +13,19 @@ public class ImpactedTests {
     	 String jsonFilePath = "D:\\TestCoverageDemo\\src\\test\\java\\Data\\CodeToTestMap.json";
 
 
-        // List of changed files (simulate git diff output)
-        List<String> changedFiles = List.of(
-            "src/main/java/Bahwan/TestCoverageDemo/App.java",
-            "src/main/java/Bahwan/TestCoverageDemo/codeCoverage.java"
-        );
+        // List of changed methods (simulate git diff output)
+         List<String> changedMethods = List.of(
+                 "public void sample3()",
+                 "public static String start()",
+                 "public static String stop()",
+                 "public static void main(String[] args)",
+                 "public static String processing()",
+                 "public static String start()",
+                 "public static String stop()"
+             );
 
         // Identify impacted tests
-        List<String> impactedTests = getImpactedTests(jsonFilePath, changedFiles);
+        List<String> impactedTests = getImpactedTests(jsonFilePath, changedMethods);
 
         // Print impacted tests
         System.out.println("Impacted Tests: " + impactedTests);

@@ -9,16 +9,16 @@ public class codeCoverage {
 
 	}
 	public static String start() {
-		System.out.println("start");
+		System.out.println("startinggg");
 		return "start";
 	}
 	
 	public static String stop() {
-		System.out.println("stop");
+		System.out.println("stopinggg");
 		return "stop";
 	}
 public static String processing() {
-	System.out.println("process...changed code");
+	System.out.println("process...changed code sampplr");
 	return "process";
 }
 }

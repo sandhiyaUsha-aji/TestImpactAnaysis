@@ -1,0 +1,11 @@
+{
+  "tests": {
+    "sample1": [
+      "public static String start()"
+    ],
+    "sample2": [
+      "public static String stop()"
+    ],
+    "sample3": []
+  }
+}

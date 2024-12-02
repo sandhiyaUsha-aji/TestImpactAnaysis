@@ -18,4 +18,8 @@ public class codeCoverageTest {
 	public void sample2() {
 		Assert.assertEquals(codeCoverage.stop(), "stop");
 	}
+	@Test
+	public void sample3() {
+		System.out.println("i am not impacted");
+	}
 }

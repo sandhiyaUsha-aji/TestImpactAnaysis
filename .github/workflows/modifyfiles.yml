@@ -1,7 +1,7 @@
-name: Identify Recently Pushed Changes
+name: Identify Recently Pushed Changes 
 
 on:
-  push:
+  push
     branches:
       - master
   pull_request:

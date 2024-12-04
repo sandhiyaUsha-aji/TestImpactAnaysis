@@ -1,0 +1,39 @@
+name: Identify Recently Pushed Changes
+
+on:
+  push:
+    branches:
+      - master  # Monitor the master branch for pushes
+  pull_request: # Trigger on pull request creation or updates
+    branches:
+      - master
+
+jobs:
+  identify-changed-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch the full commit history to enable comparisons
+
+      # Step 2: Identify files changed in the latest push
+      - name: Get Recently Pushed Changes
+        run: |
+          git diff --name-only HEAD~1..HEAD > modified_files.txt
+          echo "Modified files saved to modified_files.txt"
+
+      # Step 3: Display the modified files in the logs
+      - name: Show Changed Files
+        run: |
+          echo "Recently changed files in the latest push:"
+          cat modified_files.txt
+
+      # Step 4: Upload the modified_files.txt as an artifact
+      - name: Upload Changed Files Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: recently-modified-files
+          path: modified_files.txt

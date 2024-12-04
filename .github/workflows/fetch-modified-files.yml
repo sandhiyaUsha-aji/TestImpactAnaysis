@@ -7,25 +7,20 @@ on:
   pull_request:
 
 jobs:
-  detect-changes:
+  fetch-modified-files:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Step 2: Fetch Modified Files
-      - name: Fetch Modified Files
-        run: git diff --name-only HEAD~1 > modified_files.txt
-
-      # Step 3: Display the Modified Files
+      # Step 2: Fetch modified files using git diff
+      - name: Fetch modified files
+        run: |
+          git diff --name-only HEAD~1 > modified_files.txt
+          echo "Modified files saved to modified_files.txt"
+      
+      # Step 3: Display the contents of modified_files.txt in the logs
       - name: Display Modified Files
         run: cat modified_files.txt
-
-      # Step 4: Upload Modified Files as an Artifact
-      - name: Upload Modified Files
-        uses: actions/upload-artifact@v3
-        with:
-          name: modified-files
-          path: modified_files.txt

@@ -18,7 +18,7 @@ public class codeCoverage {
 		return "stop";
 	}
 public static String processing() {
-	System.out.println("process...changed code sampplr");
+	System.out.println("process...changed code sample");
 	return "process";
 }
 }

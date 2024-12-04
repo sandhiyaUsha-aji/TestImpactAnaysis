@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-01T11:59:00 IST" name="Suite" finished-at="2024-12-01T11:59:00 IST" duration-ms="143">
+  <suite started-at="2024-12-02T18:07:59 IST" name="ImpactedTests" finished-at="2024-12-02T18:07:59 IST" duration-ms="144">
     <groups>
     </groups>
-    <test started-at="2024-12-01T11:59:00 IST" name="Test" finished-at="2024-12-01T11:59:00 IST" duration-ms="143">
+    <test started-at="2024-12-02T18:07:59 IST" name="Test" finished-at="2024-12-02T18:07:59 IST" duration-ms="144">
       <class name="Bahwan.TestCoverageDemo.codeCoverageTest">
-        <test-method signature="sample1()[pri:0, instance:Bahwan.TestCoverageDemo.codeCoverageTest@73163d48]" started-at="2024-12-01T11:59:00 IST" name="sample1" finished-at="2024-12-01T11:59:00 IST" duration-ms="21" status="PASS">
+        <test-method signature="sample1()[pri:0, instance:Bahwan.TestCoverageDemo.codeCoverageTest@4504d271]" started-at="2024-12-02T18:07:59 IST" name="sample1" finished-at="2024-12-02T18:07:59 IST" duration-ms="22" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- sample1 -->
-        <test-method signature="sample2()[pri:0, instance:Bahwan.TestCoverageDemo.codeCoverageTest@73163d48]" started-at="2024-12-01T11:59:00 IST" name="sample2" finished-at="2024-12-01T11:59:00 IST" duration-ms="1" status="PASS">
+        <test-method signature="sample2()[pri:0, instance:Bahwan.TestCoverageDemo.codeCoverageTest@4504d271]" started-at="2024-12-02T18:07:59 IST" name="sample2" finished-at="2024-12-02T18:07:59 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- sample2 -->
       </class> <!-- Bahwan.TestCoverageDemo.codeCoverageTest -->
     </test> <!-- Test -->
-  </suite> <!-- Suite -->
+  </suite> <!-- ImpactedTests -->
 </testng-results>

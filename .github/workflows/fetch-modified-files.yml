@@ -1,0 +1,31 @@
+name: Fetch Modified Files
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Fetch Modified Files
+      - name: Fetch Modified Files
+        run: git diff --name-only HEAD~1 > modified_files.txt
+
+      # Step 3: Display the Modified Files
+      - name: Display Modified Files
+        run: cat modified_files.txt
+
+      # Step 4: Upload Modified Files as an Artifact
+      - name: Upload Modified Files
+        uses: actions/upload-artifact@v3
+        with:
+          name: modified-files
+          path: modified_files.txt

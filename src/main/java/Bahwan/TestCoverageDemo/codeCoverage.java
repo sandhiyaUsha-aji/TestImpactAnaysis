@@ -9,12 +9,12 @@ public class codeCoverage {
 
 	}
 	public static String start() {
-		System.out.println("startinggg1");
+		System.out.println("startinggg12");
 		return "start";
 	}
 	
 	public static String stop() {
-		System.out.println("stopinggg2");
+		System.out.println("stopinggg23");
 		return "stop";
 	}
 public static String processing() {

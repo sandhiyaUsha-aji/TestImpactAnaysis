@@ -1,4 +1,4 @@
-name: Fetch Modified Files
+name: Fetch Recently Modified Files
 
 on:
   push:
@@ -13,14 +13,18 @@ jobs:
     steps:
       # Step 1: Checkout the repository code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1 # Fetch only the latest commit for efficiency
 
-      # Step 2: Fetch modified files using git diff
-      - name: Fetch modified files
+      # Step 2: Fetch files modified in the most recent commit
+      - name: Fetch recently modified files
         run: |
-          git diff --name-only HEAD~1 > modified_files.txt
+          git diff-tree --no-commit-id --name-only -r HEAD > modified_files.txt
           echo "Modified files saved to modified_files.txt"
-      
+
       # Step 3: Display the contents of modified_files.txt in the logs
       - name: Display Modified Files
-        run: cat modified_files.txt
+        run: |
+          echo "Recently modified files are:"
+          cat modified_files.txt

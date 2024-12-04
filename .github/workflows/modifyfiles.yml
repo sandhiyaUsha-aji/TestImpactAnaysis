@@ -3,8 +3,8 @@ name: Identify Recently Pushed Changes
 on:
   push:
     branches:
-      - master  # Monitor the master branch for pushes
-  pull_request: # Trigger on pull request creation or updates
+      - master
+  pull_request:
     branches:
       - master
 
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Fetch the full commit history to enable comparisons
+          fetch-depth: 0
 
       # Step 2: Identify files changed in the latest push
       - name: Get Recently Pushed Changes
@@ -37,3 +37,10 @@ jobs:
         with:
           name: recently-modified-files
           path: modified_files.txt
+
+      # Step 5: Run Java Application
+      - name: Run Java Application
+        run: |
+          java -cp . IdentifyImpactedTests
+        env:
+          MODIFIED_FILES_PATH: ${{ github.workspace }}/modified_files.txt

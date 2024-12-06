@@ -50,12 +50,12 @@ jobs:
       # Step 6: Compile Java Code
       - name: Compile Java Code
         run: |
-          javac -cp "src/test/java:C:/Users/ss115605/.m2/repository/org/json/json/20210307/json-20210307.jar" src/test/java/IdentifyImpactedTests.java
+          javac -cp "src/test/java;C:/Users/ss115605/.m2/repository/org/json/json/20210307/json-20210307.jar" src/test/java/IdentifyImpactedTests.java
 
       # Step 7: Run Java Application
       - name: Run Java Application
         run: |
-         java -cp "src/test/java:C:/Users/ss115605/.m2/repository/org/json/json/20210307/json-20210307.jar" IdentifyImpactedTests
+         java -cp "src/test/java;C:/Users/ss115605/.m2/repository/org/json/json/20210307/json-20210307.jar" IdentifyImpactedTests
 
         env:
           MODIFIED_FILES_PATH: ${{ github.workspace }}/modified_files.txt

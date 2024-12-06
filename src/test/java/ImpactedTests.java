@@ -64,6 +64,6 @@ public class ImpactedTests {
             System.err.println("Error processing JSON data: " + e.getMessage());
         }
 
-        return impactedTests;
+        return impactedTests;    
     }
 }

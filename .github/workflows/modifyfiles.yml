@@ -38,13 +38,12 @@ jobs:
           name: recently-modified-files
           path: modified_files.txt
 
-      # Step 5: Set up Java
-      - name: Set up OpenJDK 8
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 8  # Specifies OpenJDK 8
-          distribution: 'openjdk'  # Specifies OpenJDK distribution
-          check-latest: false   
+          java-version: '8'
+          distribution: 'oracle'
+   
 
 
       # Step 6: Compile Java Code

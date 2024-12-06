@@ -45,8 +45,7 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
           cache: maven
-      - name: Install Dependencies
-        run: mvn install
+      
 
       # Step 6: Compile Java Code
       - name: Compile Java Code

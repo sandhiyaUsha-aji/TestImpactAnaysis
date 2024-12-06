@@ -42,7 +42,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17' # Use a Java version compatible with your code
+          java-version: '1.8.0_401' # Use a Java version compatible with your code
 
       # Step 6: Compile Java Code
       - name: Compile Java Code

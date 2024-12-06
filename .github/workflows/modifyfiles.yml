@@ -45,15 +45,19 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
           cache: maven
+      - name: Install Dependencies
+        run: mvn install
 
       # Step 6: Compile Java Code
       - name: Compile Java Code
         run: |
-          javac src/test/java/IdentifyImpactedTests.java
+          javac -cp "src/test/java:lib/json-20210307.jar" src/test/java/IdentifyImpactedTests.java
+
 
       # Step 7: Run Java Application
       - name: Run Java Application
         run: |
-          java -cp src/test/java IdentifyImpactedTests
+         java -cp "src/test/java:lib/json-20210307.jar" IdentifyImpactedTests
+
         env:
           MODIFIED_FILES_PATH: ${{ github.workspace }}/modified_files.txt

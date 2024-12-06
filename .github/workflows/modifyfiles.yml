@@ -1,4 +1,4 @@
-name: Identify Recently Pushed Changes
+name: Get Modified Files in Last Commit
 
 on:
   push:

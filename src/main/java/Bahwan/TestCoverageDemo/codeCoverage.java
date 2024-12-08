@@ -17,7 +17,7 @@ public class codeCoverage {
 		System.out.println("stopinggg233");
 		return "stop";
 	}
-public static String processing() {
+public static String newProcess() {
 	System.out.println("process....changed code sample1234");
 	return "process"; 
 }

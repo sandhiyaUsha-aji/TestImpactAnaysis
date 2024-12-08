@@ -23,8 +23,13 @@ jobs:
     - name: Detect Modified Files
       id: modified_files
       run: |
-        MODIFIED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        # Get modified files and replace newlines with spaces
+        MODIFIED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | tr '\n' ' ')
+        
+        # Save the modified files to a text file
         echo "$MODIFIED_FILES" > modified_files.txt
+        
+        # Export the modified files as an environment variable
         echo "MODIFIED_FILES=$MODIFIED_FILES" >> $GITHUB_ENV
 
     # Step 3: Upload modified_files.txt as an artifact

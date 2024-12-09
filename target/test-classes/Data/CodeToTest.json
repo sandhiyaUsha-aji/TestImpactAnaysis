@@ -1,1 +1,5 @@
-{"testcodeCoverage.java": ["Bahwan.TestCoverageDemo.codeCoverage.java"]}
+{
+  "sample1" : "D:\\TestCoverageDemo\\src\\main\\java\\Bahwan\\TestCoverageDemo\\codeCoverage.java",
+  "sample3" : "No Coverage",
+  "sample2" : "D:\\TestCoverageDemo\\src\\main\\java\\Bahwan\\TestCoverageDemo\\codeCoverage.java"
+}

@@ -1,4 +1,5 @@
 import org.json.JSONObject;
+
 import org.json.JSONArray;
 
 import java.io.FileReader;
@@ -11,27 +12,28 @@ public class ImpactedTests {
     public static void main(String[] args) {
         // Path to the JSON file
     	 String jsonFilePath = "D:\\TestCoverageDemo\\src\\test\\java\\Data\\CodeToTestMap.json";
+    	 String modifiedFilesPath = "D:\\Work/OneDrive - bahwancybertek.com\\modified-files\\modified_files.txt";
 
-
-        // List of changed methods (simulate git diff output)
-         List<String> changedMethods = List.of(
-                 "public void sample3()",
-                 "public static String start()",
-                 "public static String stop()",
-                 "public static void main(String[] args)",
-                 "public static String processing()",
-                 "public static String start()",
-                 "public static String stop()"
-             );
+        // List of changed files (simulate git diff output)
+    	 
+//         List<String> changedMethods = List.of(
+//                 "public void sample3()",
+//                 "public static String start()",
+//                 "public static String stop()",
+//                 "public static void main(String[] args)",
+//                 "public static String processing()",
+//                 "public static String start()",
+//                 "public static String stop()"
+//             );
 
         // Identify impacted tests
-        List<String> impactedTests = getImpactedTests(jsonFilePath, changedMethods);
+        List<String> impactedTests = getImpactedTests(jsonFilePath, modifiedFilesPath);
 
         // Print impacted tests
         System.out.println("Impacted Tests: " + impactedTests);
     }
 
-    public static List<String> getImpactedTests(String jsonFilePath, List<String> changedFiles) {
+    public static List<String> getImpactedTests(String jsonFilePath, String modifiedFilesPath) {
         List<String> impactedTests = new ArrayList<>();
 
         try {
@@ -52,7 +54,7 @@ public class ImpactedTests {
 
                 // Check if any of the changed files match the test-to-code mapping
                 for (int i = 0; i < files.length(); i++) {
-                    if (changedFiles.contains(files.getString(i))) {
+                    if (modifiedFilesPath.contains(files.getString(i))) {
                         impactedTests.add(testName);
                         break;
                     }

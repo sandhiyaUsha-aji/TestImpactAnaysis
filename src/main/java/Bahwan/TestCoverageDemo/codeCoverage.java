@@ -14,7 +14,7 @@ public class codeCoverage {
 	}
 	
 	public static String stop() {
-		System.out.println("stop1");
+		System.out.println("please stop");
 		return "stop";
 	}
 public static String newProcess() {

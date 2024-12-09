@@ -7,9 +7,8 @@
         <methods>
           <include name="sample1"/>
           <include name="sample2"/>
-        </methods>    
-        </class>
-      
+        </methods>
+      </class>
     </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+  </test>
+</suite>

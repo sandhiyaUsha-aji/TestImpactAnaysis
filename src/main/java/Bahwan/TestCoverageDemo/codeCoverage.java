@@ -4,7 +4,7 @@ public class codeCoverage {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Hi BCT");
+		System.out.println("Hi bahwancybertek ");
 		start();
 
 	}
@@ -14,7 +14,7 @@ public class codeCoverage {
 	}
 	
 	public static String stop() {
-		System.out.println("stopinggg233");
+		System.out.println("stop");
 		return "stop";
 	}
 public static String newProcess() {

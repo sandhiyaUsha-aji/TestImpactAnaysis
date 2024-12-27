@@ -13,8 +13,8 @@ public class ImpactedTestsFinder {
     public static void main(String[] args) {
         try {
             // Paths
-            String modifiedFilesPath = "D:\\TestCoverageDemo\\src\\test\\java\\Data\\ModifiedFiles.txt";
-            String codeToTestJsonPath = "D:\\TestCoverageDemo\\src\\test\\java\\Data\\codeToTest.json";
+            String modifiedFilesPath = "D:\\CustomTestImpactAnalysis\\src\\test\\java\\Data\\ModifiedFiles.txt";
+            String codeToTestJsonPath = "D:\\CustomTestImpactAnalysis\\src\\test\\java\\Data\\CodeToTest.json";
 
             // Read modified files
             List<String> modifiedFiles = Files.readAllLines(Paths.get(modifiedFilesPath));

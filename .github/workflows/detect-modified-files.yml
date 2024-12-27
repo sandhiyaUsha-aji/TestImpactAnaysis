@@ -3,10 +3,10 @@ name: Detect Modified Files
 on:
   push:
     branches:
-      - master  # Replace with your branch name
+      - main  # Replace with your branch name
   pull_request:
     branches:
-      - master  # Replace with your branch name
+      - main  # Replace with your branch name
 
 jobs:
   detect-changes:

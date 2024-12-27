@@ -14,9 +14,9 @@ public class DynamicTestNGGenerator {
     public static void main(String[] args) {
         try {
             // Paths to inputs and output
-            String modifiedFilesPath = "D:\\TestCoverageDemo\\src\\test\\java\\Data\\ModifiedFiles.txt";
-            String codeToTestJsonPath = "D:\\TestCoverageDemo\\src\\test\\java\\Data\\codeToTest.json";
-            String testngXmlPath = "D:\\TestCoverageDemo\\testng.xml";
+            String modifiedFilesPath = "D:\\CustomTestImpactAnalysis\\src\\test\\java\\Data\\ModifiedFiles.txt";
+            String codeToTestJsonPath = "D:\\CustomTestImpactAnalysis\\src\\test\\java\\Data\\CodeToTest.json";
+            String testngXmlPath = "D:\\CustomTestImpactAnalysis\\testng2.xml";
 
             // Step 1: Read and normalize modified files
             List<String> modifiedFiles = readModifiedFiles(modifiedFilesPath);
@@ -36,7 +36,7 @@ public class DynamicTestNGGenerator {
             // Step 4: Update testng.xml dynamically
             generateTestNGXml(impactedTests, testngXmlPath);
 
-            System.out.println("testng.xml file updated successfully with impacted tests.");
+            System.out.println("testng2.xml file updated successfully with impacted tests.");
         } catch (Exception e) {
             e.printStackTrace();
         }

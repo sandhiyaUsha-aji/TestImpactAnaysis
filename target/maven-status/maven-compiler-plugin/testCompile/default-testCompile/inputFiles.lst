@@ -1,5 +1,5 @@
-D:\TestCoverageDemo\src\test\java\Bahwan\TestCoverageDemo\codeCoverageTest.java
-D:\TestCoverageDemo\src\test\java\CodeToTestMapper.java
-D:\TestCoverageDemo\src\test\java\IdentifyImpactedTests.java
-D:\TestCoverageDemo\src\test\java\ImpactedTests.java
-D:\TestCoverageDemo\src\test\java\UpdateTestMapping.java
+D:\CustomTestImpactAnalysis\src\test\java\Bahwan\TestCoverageDemo\LoginPage.java
+D:\CustomTestImpactAnalysis\src\test\java\CodeToTestMapper.java
+D:\CustomTestImpactAnalysis\src\test\java\DynamicTestNGGenerator.java
+D:\CustomTestImpactAnalysis\src\test\java\ImpactedTestsFinder.java
+D:\CustomTestImpactAnalysis\src\test\java\TestCoverageAnalyzer.java

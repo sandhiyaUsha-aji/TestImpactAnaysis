@@ -1,137 +1,147 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-
+import java.io.*;
+import java.util.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.HashMap;
-import java.util.Map;
+import org.w3c.dom.*;
+import com.google.gson.Gson;
 
 public class CodeToTestMapper {
-    public static void main(String[] args) {
-        try {
-            // Paths
-            String jacocoReportPath = "D:\\TestCoverageDemo\\target\\site\\jacoco\\jacoco.xml";
-            String testScriptPath = "D:\\TestCoverageDemo\\src\\test\\java\\Bahwan\\TestCoverageDemo\\codeCoverageTest.java";
-            String sourceCodeBasePath = "D:\\TestCoverageDemo\\src\\main\\java\\Bahwan\\TestCoverageDemo\\codeCoverage.java";
-            String jsonOutputPath = "D:\\TestCoverageDemo\\src\\test\\java\\Data\\codeToTest.json";
 
-            // Parse JaCoCo report and test script
-            Map<String, String> codeToTestMap = parseJaCoCoReportAndTestScript(
-                    jacocoReportPath, testScriptPath, sourceCodeBasePath);
+    public static void main(String[] args) throws Exception {
+        // Step 1: Parse JaCoCo XML to extract covered classes and methods
+        Map<String, List<String>> classToMethods = extractClassesFromJaCoCo("D:\\CustomTestImpactAnalysis\\target\\site\\jacoco\\jacoco.xml");
 
-            // Generate JSON file
-            generateJsonFile(codeToTestMap, jsonOutputPath);
+        // Step 2: Dynamically extract test method names from test scripts
+        List<String> testMethods = extractTestMethodsFromFile("D:\\CustomTestImpactAnalysis\\src\\test\\java\\Bahwan\\TestCoverageDemo\\LoginPage.java");
 
-            System.out.println("codeToTest.json file generated successfully!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Step 3: Map test methods to classes
+        Map<String, String> mappedTests = mapTestMethodsToClasses(testMethods, classToMethods);
+
+        // Step 4: Generate codeToTest.json
+        generateCodeToTestJson(mappedTests);
+
+        // Output the results
+        System.out.println("Classes and Methods from JaCoCo XML: " + classToMethods);
+        System.out.println("Test Methods from File: " + testMethods);
+        System.out.println("Mapped Test Methods to Classes: " + mappedTests);
     }
 
-    private static Map<String, String> parseJaCoCoReportAndTestScript(
-            String reportPath, String testScriptPath, String sourceCodeBasePath) {
-        Map<String, String> codeToTestMap = new HashMap<>();
+    private static Map<String, List<String>> extractClassesFromJaCoCo(String jacocoFilePath) throws Exception {
+        Map<String, List<String>> classToMethods = new HashMap<>();
+        File jacocoFile = new File(jacocoFilePath);
 
-        try {
-            // Extract covered methods from JaCoCo XML report
-            Map<String, String> methodToSourceMap = new HashMap<>();
-            File reportFile = new File(reportPath);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        // Disable DTD validation to avoid FileNotFoundException
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setFeature("http://xml.org/sax/features/validation", false);
 
-            // Disable DTD validation
-            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-            factory.setFeature("http://xml.org/sax/features/validation", false);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(jacocoFile);
 
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(reportFile);
+        NodeList classNodes = doc.getElementsByTagName("class");
+        for (int i = 0; i < classNodes.getLength(); i++) {
+            Element classElement = (Element) classNodes.item(i);
+            String className = classElement.getAttribute("name").replace("/", ".");
+            NodeList methodNodes = classElement.getElementsByTagName("method");
 
-            NodeList packageNodes = doc.getElementsByTagName("package");
-            for (int i = 0; i < packageNodes.getLength(); i++) {
-                NodeList classNodes = packageNodes.item(i).getChildNodes();
-                for (int j = 0; j < classNodes.getLength(); j++) {
-                    if (classNodes.item(j).getNodeName().equals("class")) {
-                        String className = classNodes.item(j).getAttributes()
-                                .getNamedItem("name").getNodeValue();
+            List<String> methods = new ArrayList<>();
+            for (int j = 0; j < methodNodes.getLength(); j++) {
+                Element methodElement = (Element) methodNodes.item(j);
+                String methodName = methodElement.getAttribute("name");
+                methods.add(methodName);
+            }
+            classToMethods.put(className, methods);
+        }
 
-                        // Convert class name to source file path
-                        String sourceFilePath = sourceCodeBasePath.replace("\\", "\\\\");
+        return classToMethods;
+    }
 
-                        NodeList methodNodes = classNodes.item(j).getChildNodes();
-                        for (int k = 0; k < methodNodes.getLength(); k++) {
-                            if (methodNodes.item(k).getNodeName().equals("method")) {
-                                String methodName = methodNodes.item(k).getAttributes()
-                                        .getNamedItem("name").getNodeValue();
+    private static List<String> extractTestMethodsFromFile(String filePath) {
+        List<String> methodNames = new ArrayList<>();
+        File file = new File(filePath);
 
-                                // Map method to its source file path
-                                methodToSourceMap.put(methodName, sourceFilePath);
-                            }
+        if (!file.exists()) {
+            System.out.println("The file does not exist: " + filePath);
+            return methodNames;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            boolean insideTestMethod = false;
+
+            while ((line = reader.readLine()) != null) {
+                line = line.trim(); // Trim any extra whitespace
+
+                // Check for the @Test annotation
+                if (line.startsWith("@Test")) {
+                    insideTestMethod = true;
+                    continue; // Skip the @Test annotation line
+                }
+
+                // If inside a @Test method, look for the method name
+                if (insideTestMethod) {
+                    if (line.startsWith("public") || line.startsWith("protected") || line.startsWith("private")) {
+                        // Extract method name from the method declaration line
+                        String[] tokens = line.split("\\(");
+                        String methodSignature = tokens[0].trim();
+                        String[] parts = methodSignature.split("\\s+");
+                        if (parts.length >= 2) {
+                            String methodName = parts[parts.length - 1]; // The last part is the method name
+                            methodNames.add(methodName);
                         }
+                        insideTestMethod = false; // Reset after capturing the method name
                     }
                 }
             }
-
-            // Parse test script to extract test method names
-            File testScriptFile = new File(testScriptPath);
-            if (testScriptFile.exists()) {
-                try (java.util.Scanner scanner = new java.util.Scanner(testScriptFile)) {
-                    while (scanner.hasNextLine()) {
-                        String line = scanner.nextLine().trim();
-                        if (line.startsWith("@Test")) {
-                            // Read the next line for the method declaration
-                            String methodLine = scanner.nextLine().trim();
-                            if (methodLine.startsWith("public void")) {
-                                String testMethodName = methodLine.split("\\s+")[2].split("\\(")[0];
-
-                                // Map test method to source method using traditional switch
-                                String coveredSource;
-                                switch (testMethodName) {
-                                    case "sample1":
-                                    case "sample2":
-                                        coveredSource = methodToSourceMap.getOrDefault("start", "No Coverage");
-                                        break;
-                                    case "sample3":
-                                        coveredSource = "No Coverage";
-                                        break;
-                                    default:
-                                        coveredSource = "Unknown Source";
-                                }
-
-                                // Map test method to the source file
-                                codeToTestMap.put(testMethodName, coveredSource);
-                            }
-                        }
-                    }
-                }
-            } else {
-                System.err.println("Test script file not found: " + testScriptPath);
-            }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return codeToTestMap;
+        return methodNames;
     }
 
-    private static void generateJsonFile(Map<String, String> codeToTestMap, String outputPath) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectNode rootNode = mapper.createObjectNode();
+    private static Map<String, String> mapTestMethodsToClasses(List<String> testMethods, Map<String, List<String>> classToMethods) {
+        Map<String, String> testToClassMap = new HashMap<>();
 
-            for (Map.Entry<String, String> entry : codeToTestMap.entrySet()) {
-                // Replace double backslashes with single backslashes
-                String normalizedPath = entry.getValue().replace("\\\\", "\\");
-                rootNode.put(entry.getKey(), normalizedPath);
+        for (String testMethod : testMethods) {
+            boolean isMapped = false;
+
+            for (Map.Entry<String, List<String>> entry : classToMethods.entrySet()) {
+                String className = entry.getKey();
+                List<String> methods = entry.getValue();
+
+                // Check if test method matches any method in this class (case-insensitive)
+                for (String method : methods) {
+                    if (method.equalsIgnoreCase(testMethod)) {
+                        testToClassMap.put(testMethod, "D:\\CustomTestImpactAnalysis\\src\\main\\java\\" + className.replace(".", "\\") + ".java");
+                        isMapped = true;
+                        break;
+                    }
+                }
+
+                if (isMapped) break; // Stop searching if a match is found
             }
 
-            // Write JSON to file
-            try (FileWriter file = new FileWriter(outputPath)) {
-                mapper.writerWithDefaultPrettyPrinter().writeValue(file, rootNode);
+            // If no mapping is found, mark as "No Coverage"
+            if (!isMapped) {
+                testToClassMap.put(testMethod, "No Coverage");
             }
-        } catch (Exception e) {
+        }
+
+        return testToClassMap;
+    }
+
+
+
+
+    private static void generateCodeToTestJson(Map<String, String> mappedTests) {
+        Gson gson = new Gson();
+        String jsonOutput = gson.toJson(mappedTests);
+
+        try (FileWriter writer = new FileWriter("D:\\CustomTestImpactAnalysis\\src\\test\\java\\Data\\CodeToTest.json")) {
+            writer.write(jsonOutput);
+            System.out.println("codeToTest.json generated successfully.");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -1,5 +1,1 @@
-{
-  "sample1" : "D:\\TestCoverageDemo\\src\\main\\java\\Bahwan\\TestCoverageDemo\\codeCoverage.java",
-  "sample3" : "No Coverage",
-  "sample2" : "D:\\TestCoverageDemo\\src\\main\\java\\Bahwan\\TestCoverageDemo\\codeCoverage.java"
-}
+{"Signup":"D:\\CustomTestImpactAnalysis\\src\\main\\java\\Bahwan\\TestCoverageDemo\\LoginSourceCode.java","Login":"D:\\CustomTestImpactAnalysis\\src\\main\\java\\Bahwan\\TestCoverageDemo\\LoginSourceCode.java","Home":"D:\\CustomTestImpactAnalysis\\src\\main\\java\\Bahwan\\TestCoverageDemo\\LoginSourceCode.java","welcome":"No Coverage"}

@@ -1,1 +1,5 @@
-Bahwan\TestCoverageDemo\codeCoverageTest.class
+TestCoverageAnalyzer.class
+Bahwan\TestCoverageDemo\LoginPage.class
+CodeToTestMapper.class
+ImpactedTestsFinder.class
+DynamicTestNGGenerator.class

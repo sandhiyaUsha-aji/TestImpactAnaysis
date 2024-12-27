@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-ImpactedTests" class="navigator-link ">
-                    <span>D:\TestCoverageDemo\testng.xml</span>
+                    <span>D:\CustomTestImpactAnalysis\testng.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,7 +92,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,   2 passed</span>
+                    <span class="method-stats">4 methods,   4 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -103,12 +103,22 @@
                     <div class="method-list-content passed suite-ImpactedTests">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-ImpactedTests" title="Bahwan.TestCoverageDemo.codeCoverageTest" class="method navigator-link" hash-for-method="sample1">sample1</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-ImpactedTests" title="Bahwan.TestCoverageDemo.LoginPage" class="method navigator-link" hash-for-method="Home">Home</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-ImpactedTests" title="Bahwan.TestCoverageDemo.codeCoverageTest" class="method navigator-link" hash-for-method="sample2">sample2</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-ImpactedTests" title="Bahwan.TestCoverageDemo.LoginPage" class="method navigator-link" hash-for-method="Login">Login</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-ImpactedTests" title="Bahwan.TestCoverageDemo.LoginPage" class="method navigator-link" hash-for-method="Signup">Signup</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-ImpactedTests" title="Bahwan.TestCoverageDemo.LoginPage" class="method navigator-link" hash-for-method="welcome">welcome</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-ImpactedTests -->
@@ -126,21 +136,35 @@
           <div class="suite-ImpactedTests-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">Bahwan.TestCoverageDemo.codeCoverageTest</span>
+              <span class="class-name">Bahwan.TestCoverageDemo.LoginPage</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="sample1">
-                  </a> <!-- sample1 -->
-                  <span class="method-name">sample1</span>
+                  <a name="Home">
+                  </a> <!-- Home -->
+                  <span class="method-name">Home</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="sample2">
-                  </a> <!-- sample2 -->
-                  <span class="method-name">sample2</span>
+                  <a name="Login">
+                  </a> <!-- Login -->
+                  <span class="method-name">Login</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="Signup">
+                  </a> <!-- Signup -->
+                  <span class="method-name">Signup</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="welcome">
+                  </a> <!-- welcome -->
+                  <span class="method-name">welcome</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -148,7 +172,7 @@
         </div> <!-- panel ImpactedTests -->
         <div panel-name="test-xml-ImpactedTests" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">D:\TestCoverageDemo\testng.xml</span>
+            <span class="header-content">D:\CustomTestImpactAnalysis\testng.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -157,12 +181,7 @@
 &lt;suite name=&quot;ImpactedTests&quot; guice-stage=&quot;DEVELOPMENT&quot; verbose=&quot;0&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Test&quot; verbose=&quot;0&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;Bahwan.TestCoverageDemo.codeCoverageTest&quot;&gt;
-        &lt;methods&gt;
-          &lt;include name=&quot;sample1&quot;/&gt;
-          &lt;include name=&quot;sample2&quot;/&gt;
-        &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- Bahwan.TestCoverageDemo.codeCoverageTest --&gt;
+      &lt;class name=&quot;Bahwan.TestCoverageDemo.LoginPage&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- ImpactedTests --&gt;
@@ -202,20 +221,28 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(4);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'sample1')
-data.setCell(0, 2, 'Bahwan.TestCoverageDemo.codeCoverageTest')
-data.setCell(0, 3, 10);
+data.setCell(0, 1, 'Home')
+data.setCell(0, 2, 'Bahwan.TestCoverageDemo.LoginPage')
+data.setCell(0, 3, 14);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'sample2')
-data.setCell(1, 2, 'Bahwan.TestCoverageDemo.codeCoverageTest')
-data.setCell(1, 3, 0);
+data.setCell(1, 1, 'Login')
+data.setCell(1, 2, 'Bahwan.TestCoverageDemo.LoginPage')
+data.setCell(1, 3, 2);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'welcome')
+data.setCell(2, 2, 'Bahwan.TestCoverageDemo.LoginPage')
+data.setCell(2, 3, 1);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'Signup')
+data.setCell(3, 2, 'Bahwan.TestCoverageDemo.LoginPage')
+data.setCell(3, 3, 1);
 window.suiteTableData['ImpactedTests']= { tableData: data, tableDiv: 'times-div-ImpactedTests'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 10 ms</span>
+              <span class="suite-total-time">Total running time: 18 ms</span>
               <div id="times-div-ImpactedTests">
               </div> <!-- times-div-ImpactedTests -->
             </div> <!-- times-div -->
@@ -230,16 +257,9 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-ImpactedTests" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+            <span class="header-content">0 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
-            <div class="ignored-class-div">
-              <span class="ignored-class-name">Bahwan.TestCoverageDemo.codeCoverageTest</span>
-              <div class="ignored-methods-div">
-                <span class="ignored-method-name">sample3</span>
-                <br/>
-              </div> <!-- ignored-methods-div -->
-            </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-ImpactedTests" class="panel">
@@ -248,14 +268,22 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">Bahwan.TestCoverageDemo.codeCoverageTest</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">Bahwan.TestCoverageDemo.LoginPage</div> <!-- chronological-class-name -->
               <div class="test-method">
-                <span class="method-name">sample1</span>
+                <span class="method-name">Home</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">sample2</span>
-                <span class="method-start">14 ms</span>
+                <span class="method-name">Login</span>
+                <span class="method-start">20 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">Signup</span>
+                <span class="method-start">24 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">welcome</span>
+                <span class="method-start">26 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
